@@ -1,3 +1,3 @@
 # FireStore
 
-Project ready is complaty ✌🏻.
+Project is complaty now take it ✌.
