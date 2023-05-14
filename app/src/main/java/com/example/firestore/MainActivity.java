@@ -2,6 +2,8 @@ package com.example.firestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,44 +20,28 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText ed_name,ed_age;
-    Button btn;
+    Button add, view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ed_age = findViewById(R.id.editTextTextPersonName2);
-        ed_name = findViewById(R.id.editTextTextPersonName);
-        btn = findViewById(R.id.button);
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        add = findViewById(R.id.btn_insert);
+        view = findViewById(R.id.btn_view);
+
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String age = ed_age.getText().toString();
-                String name = ed_name.getText().toString();
-
-                Map<String, Object> user = new HashMap<>();
-                user.put("name",name);
-                user.put("age", age);
-
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(MainActivity.this, "Successed", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                Intent i = new Intent(MainActivity.this, InsertActivity.class);
+                startActivity(i);
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, viewtActivity.class);
+                startActivity(i);
             }
         });
     }
