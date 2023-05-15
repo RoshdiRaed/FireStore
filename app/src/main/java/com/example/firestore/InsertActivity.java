@@ -22,7 +22,7 @@ public class InsertActivity extends AppCompatActivity {
     Button btn_save;
     FirebaseFirestore db;
 
-    Map<String, Object> user
+    Map<String, Object> user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +53,32 @@ public class InsertActivity extends AppCompatActivity {
 
     private void insertTofirestore() {
         db.collection("users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(InsertActivity.this, "Successed", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(InsertActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        db.collection("Customer")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(InsertActivity.this, "Successed", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(InsertActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        db.collection("Product")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
